@@ -1,0 +1,15 @@
+import 'package:online_exam100/domain/common/api_result.dart';
+import 'package:online_exam100/domain/model/User.dart';
+
+abstract class AuthRepository{
+  Future<Result<User>>signup({
+    required String phone,
+    required String rePassword,
+    required String password,
+    required String email,
+    required String lastName,
+    required String firstName,
+    required String username,
+
+});
+}
