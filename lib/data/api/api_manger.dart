@@ -25,4 +25,16 @@ class ApiManger {
      return null;
    }
   }
+
+
+  Future<AuthResponse?> login({
+    required String email,
+    required String password,
+  }) async {
+    var response = await _dio.post(
+        ApiConstants.signInUrl,
+        data: {"email": email, "password": password});
+    AuthResponse authResponse = AuthResponse.fromJson(response.data);
+    return authResponse;
+  }
 }

@@ -27,4 +27,9 @@ class AuthRepositoryImpl implements AuthRepository {
         firstName: firstName,
         username: username);
   }
+
+
+  Future<Result<User?>> login({required String email, required String password}) {
+    return authOnlineDataSource.login(email: email, password: password);
+  }
 }
