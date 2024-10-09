@@ -10,4 +10,10 @@ abstract class AuthOnlineDataSource {
       required String lastName,
       required String firstName,
       required String username});
+
+ Future<Result<User?>> login({required String email, required String password}) ;
+
+
 }
+
+

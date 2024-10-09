@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:online_exam100/presentation/auth/login/screen/LoginScreen.dart';
 import 'package:online_exam100/presentation/auth/signup/screen/signup_screen.dart';
 
 import 'core/di/di.dart';
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: SignupScreen.routeName,
+          initialRoute: LoginScreen.routeName,
           routes: {
             SignupScreen.routeName: (context) => SignupScreen(),
+            LoginScreen.routeName:(context)=>LoginScreen()
 
           },
 

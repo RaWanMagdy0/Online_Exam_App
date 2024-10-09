@@ -40,4 +40,19 @@ class AuthOnlineDataSourceImpl implements AuthOnlineDataSource {
       },
     );
   }
+
+
+
+  @override
+  Future<Result<User?>> login(
+      {required String email, required String password}) async {
+    return executeApi<User?>(
+          () async {
+        var authResponse =
+        await apiManger.login(email: email, password: password);
+        var userDto = UserDto(token: authResponse?.token);
+        return userDto.toUser();
+      },
+    );
+  }
 }

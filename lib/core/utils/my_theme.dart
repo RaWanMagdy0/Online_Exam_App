@@ -10,6 +10,8 @@ class MyTheme {
   static const mainColor = Color(0xFF004182);
   static const blueColor = Color(0xFFDFE7F7);
   static const blueBaseColor = Color(0xFF02369C);
+
+
   static ThemeData LightTheme = ThemeData(
     textTheme: TextTheme(
         titleLarge: TextStyle(
