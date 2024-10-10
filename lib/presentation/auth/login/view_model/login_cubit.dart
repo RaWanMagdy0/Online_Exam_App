@@ -3,8 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:online_exam100/domain/common/api_result.dart';
-import 'package:online_exam100/domain/common/custom_exception.dart';
+import 'package:online_exam100/core/api_resault/api_resault.dart';
 import 'package:online_exam100/domain/model/User.dart';
 import 'package:online_exam100/domain/usecase/login_use_case.dart';
 
@@ -17,8 +16,8 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
-  GlobalKey<FormState>emailFormKey=GlobalKey<FormState>();
-  GlobalKey<FormState>passwordFormKey=GlobalKey<FormState>();
+  GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> passwordFormKey = GlobalKey<FormState>();
 
   void login() async {
     emit(LoginLoadingStata());
@@ -28,29 +27,13 @@ class LoginCubit extends Cubit<LoginState> {
       case Success<User?>():
         emit(LoginSuccessStata(user: result.data));
       case Fail<User?>():
-         String ? errorMessage=errorHandler(result.exception);
-          emit(LoginErrorStata(errorMassage: errorMessage ?? ""));
-        }
-
-
+        emit(LoginErrorStata(errorMassage: result.serverError?.errorMessage));
+    }
   }
 
-   bool isCheek=true;
+  bool isCheek = true;
   void updateButtonBackGroundColor(bool isCheeked) {
     isCheek = isCheeked;
     emit(UpdateButtonBackGroundColor());
   }
- String ? errorHandler(Exception  ? e){
-    String ?errorMessage;
-    if(e is DioHttpException){
-      errorMessage= e.errorMessage;
-    }else if(e is NoInternetError){
-      errorMessage = "No internet connection available. Please check your network connection.";
-    }else {
-      errorMessage = "An unexpected error occurred. Please try again later.";
-    }
-    return errorMessage;
- }
 }
-
-

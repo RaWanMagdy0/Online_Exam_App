@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:online_exam100/presentation/auth/login/screen/login_screen.dart';
 import 'package:online_exam100/presentation/auth/signup/view_model/signup_cubit.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/utils/dialog_utils.dart';
@@ -30,7 +31,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   context, state.loadingMessage ?? "Waiting..");
             } else if (state is SignupErrorStata) {
               DialogUtils.hideLoading(context);
-              DialogUtils.showMessage(context, state.errorMassage,
+              DialogUtils.showMessage(context, state.errorMassage!,
                   title: 'Error', posActionName: 'OK');
             } else if (state is SignupSuccessStata) {
               DialogUtils.hideLoading(context);
@@ -241,7 +242,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 fontWeight: FontWeight.w400, fontSize: 17.sp)),
                         InkWell(
                           onTap: () {
-                            //  Navigator.pushNamed(context, LoginScreen.routeName);
+                            Navigator.pushNamed(context, LoginScreen.routeName);
                           },
                           child: Text(
                             "Login",

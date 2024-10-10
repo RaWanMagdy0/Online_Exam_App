@@ -2,18 +2,12 @@ import 'package:dio/dio.dart';
 
 class ServerError implements Exception{
   String?errorMessage;
-  String?statusCode;
-  ServerError({required this.errorMessage,required this.statusCode});
-
-}
-
-class DioHttpException implements Exception{
-  String?errorMessage;
-  DioHttpException({required this.errorMessage});
+  ServerError({required this.errorMessage});
 
 
 
-  factory DioHttpException.fromDioException(DioException error) {
+  factory ServerError.fromDioException(DioException error) {
+    print(error.response?.statusCode);
     String ? errorMessage;
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
@@ -29,12 +23,12 @@ class DioHttpException implements Exception{
         errorMessage = "The server's certificate is not trusted. Please check your network security.";
         break;
       case DioExceptionType.badResponse:
-        print("121 :errror");
-        return DioHttpException.handleDioResponse(error.response);
+        return ServerError.handleDioResponse(error.response);
       case DioExceptionType.cancel:
         break;
       case DioExceptionType.connectionError:
-        errorMessage = "Connection failed. Please check your network connection.";
+        errorMessage = "Connection failed. "
+            "Please check your network connection.";
         break;
       case DioExceptionType.unknown:
         errorMessage = "An unknown error occurred. Please try again.";
@@ -44,32 +38,28 @@ class DioHttpException implements Exception{
         break;
     }
 
-        return  DioHttpException(errorMessage: errorMessage);
+    return  ServerError(errorMessage: errorMessage);
   }
 
 
-
-  factory   DioHttpException.handleDioResponse(Response<dynamic>? response) {
-   print(response?.statusCode);
-    String? errorMessage = response?.data["message"];
+  factory   ServerError.handleDioResponse(Response<dynamic>? response) {
+    String? errorMessage ;
     if (response?.statusCode == 400) {
-      errorMessage ??= "Invalid request. Please check the data and try again.";
+      errorMessage=  response?.data["message"] ?? "Invalid request. Please check the data and try again.";
     } else if (response?.statusCode == 401 || response?.statusCode == 403) {
-      errorMessage ??= "Unauthorized access. Please log in and try again.";
+      errorMessage = response?.data["message"] ?? "Unauthorized access. Please log in and try again.";
     } else if (response?.statusCode == 404) {
-      errorMessage ??= "Resource not found. The requested item does not exist.";
+      errorMessage =  "Resource not found. The requested item does not exist.";
     } else if (response?.statusCode == 409) {
-      errorMessage ??= "Conflict detected. The resource already exists or conflicts with the current state.";
+      errorMessage = response?.data["message"] ??"Conflict detected. The resource already exists or conflicts with the current state.";
     } else if (response?.statusCode == 500) {
-      errorMessage ??= "Internal server error. Please try again later.";
+      errorMessage = "Internal server error. Please try again later.";
     } else {
-      errorMessage = errorMessage ?? "An unexpected error occurred. Please try again.";
+      errorMessage = "An unexpected error occurred. Please try again.";
     }
-    return DioHttpException(errorMessage: errorMessage);
+    return ServerError(errorMessage: errorMessage);
   }
 
 }
 
 
-class NoInternetError implements Exception {}
-class InternetError implements Exception {}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_exam100/presentation/auth/login/screen/LoginScreen.dart';
+import 'package:online_exam100/config/theme/app_theme.dart';
+import 'package:online_exam100/presentation/auth/forget_password/screen/forget_password_screen.dart';
+import 'package:online_exam100/presentation/auth/login/screen/login_screen.dart';
 import 'package:online_exam100/presentation/auth/signup/screen/signup_screen.dart';
 
 import 'core/di/di.dart';
@@ -16,19 +18,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(360, 690),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: LoginScreen.routeName,
+          themeMode: ThemeMode.light,
+          theme: AppTheme.appTheme,
           routes: {
             SignupScreen.routeName: (context) => SignupScreen(),
-            LoginScreen.routeName:(context)=>LoginScreen()
-
+            LoginScreen.routeName: (context) => LoginScreen(),
+            ForgetPasswordScreen.routeName: (context) => ForgetPasswordScreen()
           },
-
         );
       },
     );

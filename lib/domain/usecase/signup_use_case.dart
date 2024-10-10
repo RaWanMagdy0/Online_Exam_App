@@ -1,4 +1,4 @@
-import 'package:online_exam100/domain/common/api_result.dart';
+import 'package:online_exam100/core/api_resault/api_resault.dart';
 import 'package:online_exam100/domain/repository/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 

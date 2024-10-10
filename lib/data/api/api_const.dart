@@ -1,5 +1,8 @@
 class ApiConstants{
   static const String baseUrl="https://exam.elevateegy.com/";
-  static const String signupUrl="v1/auth/signup";
+  static const String signupUrl="api/v1/auth/signup";
   static const String signInUrl="api/v1/auth/signin";
+  static const String forgetPasswordApi= "api/v1/auth/forgotPassword";
+  static const String verifyResetCodeApi = "api/v1/auth/verifyResetCode";
+  static const String resetPasswordApi = "api/v1/auth/resetPassword";
 }

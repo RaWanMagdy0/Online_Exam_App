@@ -14,6 +14,7 @@ class PasswordFieldWidget extends StatelessWidget {
         child: CustomTextFromField(
           labelText: "Password",
           hintText: "Enter Your Password",
+          inputType: TextInputType.text,
           controller: loginCubit.password,
           validator: (value)=>_validatorPassword(value),
           onChanged: (value) {

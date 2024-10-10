@@ -1,5 +1,3 @@
-
-
 class MyValidators {
   static String? displayNameValidator(String? displayName) {
     if (displayName == null || displayName.isEmpty) {
@@ -18,8 +16,10 @@ class MyValidators {
     }
     if (!RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
         .hasMatch(value)) {
+      print(1);
       return 'This Email is not valid';
     }
+
     return null;
   }
 

@@ -5,7 +5,7 @@ import 'package:online_exam100/core/di/di.dart';
 import 'package:online_exam100/core/utils/dialog/DialogMethod.dart';
 import 'package:online_exam100/presentation/auth/login/view_model/login_cubit.dart';
 import 'package:online_exam100/presentation/auth/login/widget/email_field_widget.dart';
-import 'package:online_exam100/presentation/auth/login/widget/forget_password_widget.dart';
+import 'package:online_exam100/presentation/auth/login/widget/forget_password_button_widget.dart';
 import 'package:online_exam100/presentation/auth/login/widget/login_submit.dart';
 import 'package:online_exam100/presentation/auth/login/widget/password_field_widget.dart';
 import 'package:online_exam100/presentation/auth/login/widget/remember_me_widget.dart';
@@ -35,47 +35,49 @@ class _LoginScreenState extends State<LoginScreen> {
                 "Login",
               ),
             ),
-            body: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-              child: Center(
-                child: Column(
-                  children: [
-                    EmailFieldWidget(
-                      loginCubit: loginViewModel,
-                    ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
-                    PasswordFieldWidget(
-                      loginCubit: loginViewModel,
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    const Row(
-                      children: [
-                        RememberMeWidget(),
-                        Spacer(),
-                        ForgetPasswordWidget(),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 64.h,
-                    ),
-                    LoginSubmit(
-                      loginCubit: loginViewModel,
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    PromPtoWidget(
-                      text: "Don't have an account",
-                      textButton: " Sign up",
-                      onPressed: () {
-                        Navigator.pushNamed(context, SignupScreen.routeName);
-                      },
-                    ),
-                  ],
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+                child: Center(
+                  child: Column(
+                    children: [
+                      EmailFieldWidget(
+                        loginCubit: loginViewModel,
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                      PasswordFieldWidget(
+                        loginCubit: loginViewModel,
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      const Row(
+                        children: [
+                          RememberMeWidget(),
+                          Spacer(),
+                          ForgetPasswordButtonWidget()
+                ],
+                      ),
+                      SizedBox(
+                        height: 64.h,
+                      ),
+                      LoginSubmit(
+                        loginCubit: loginViewModel,
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      PromPtoWidget(
+                        text: "Don't have an account",
+                        textButton: " Sign up",
+                        onPressed: () {
+                          Navigator.pushNamed(context, SignupScreen.routeName);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )),
@@ -90,15 +92,10 @@ class _LoginScreenState extends State<LoginScreen> {
           DialogMethod.showLoadingDialog(context: context);
         case LoginSuccessStata():
           Navigator.pop(context);
-
-        case LoginErrorStata():
+          case LoginErrorStata():
           Navigator.pop(context);
-          DialogMethod.showErrorORWarningDialog(
-              context: context,
-              subtitle: loginStata.errorMassage,
-              isError: false,
-              fct: () {});
-
+          DialogMethod.showToast(context: context,
+              massage: loginStata.errorMassage!);
         default:
           return;
       }

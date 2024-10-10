@@ -12,6 +12,7 @@ class EmailFieldWidget extends StatelessWidget {
     return Form(
         key: loginCubit.emailFormKey,
         child: CustomTextFromField(
+           inputType: TextInputType.emailAddress,
           labelText: "Email",
           hintText: "Enter Your Name",
           controller: loginCubit.email,
