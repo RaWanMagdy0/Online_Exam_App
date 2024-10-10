@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DialogMethod{
 
@@ -90,4 +91,20 @@ class DialogMethod{
         builder: (context) =>
     const Center(child: CircularProgressIndicator()),);
   }
+
+  static Future<void> showToast({
+    required BuildContext context,
+    required String massage,
+  }) async {
+    Fluttertoast.showToast(
+        msg: massage,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 18.0
+    );
+  }
+
 }

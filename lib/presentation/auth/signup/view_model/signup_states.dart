@@ -18,6 +18,6 @@ class SignupSuccessStata extends SignupState {
   SignupSuccessStata({required this.user});
 }
 class SignupErrorStata extends SignupState {
-  final String errorMassage;
-  SignupErrorStata({required this.errorMassage});
+  final String  ? errorMassage;
+  SignupErrorStata({ this.errorMassage});
 }

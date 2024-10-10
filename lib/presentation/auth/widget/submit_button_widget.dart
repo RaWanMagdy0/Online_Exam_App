@@ -24,7 +24,7 @@ class SubmitButtonWidget extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor:
-              cheekBackGroundColor ? AppColors.kGray : AppColors.kBlue,
+              !cheekBackGroundColor ? AppColors.kGray : AppColors.kBlue,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24.h),
           ),

@@ -9,27 +9,25 @@ class LoginSubmit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocBuilder<LoginCubit , LoginState>(
+    return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return SubmitButtonWidget(
-          text: "Login ",
-          cheekBackGroundColor:!loginCubit.isCheek,
-          onPressed: _onPressed
-        );
+            text: "Login ",
+            cheekBackGroundColor: loginCubit.isCheek,
+            onPressed: _onPressed);
       },
     );
   }
 
-    bool _cheekEmailOrPasswordIsValidate(){
-      bool isCheekFromKey = loginCubit.emailFormKey.currentState!.validate()
-          || loginCubit.passwordFormKey.currentState!.validate();
-      return isCheekFromKey;
+  bool _cheekEmailOrPasswordIsValidate() {
+    bool isCheekFromKey = loginCubit.emailFormKey.currentState!.validate() ||
+        loginCubit.passwordFormKey.currentState!.validate();
+    return isCheekFromKey;
+  }
+
+  _onPressed() {
+    if (_cheekEmailOrPasswordIsValidate()) {
+      loginCubit.login();
     }
-     _onPressed(){
-       if( _cheekEmailOrPasswordIsValidate()){
-         loginCubit.login();
-
-       }
-     }
-
+  }
 }

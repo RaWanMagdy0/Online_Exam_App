@@ -11,7 +11,6 @@ class RememberMeWidget extends StatelessWidget {
         Checkbox(
           value: true,
           onChanged: (value) {
-            value != value;
           },
         ),
         Text("Remember me", style: TextStyles.font14BlackWeight400),

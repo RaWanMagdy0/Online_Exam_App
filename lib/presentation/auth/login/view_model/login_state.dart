@@ -11,6 +11,6 @@ class LoginSuccessStata extends LoginState {
   LoginSuccessStata({required this.user});
 }
 class LoginErrorStata extends LoginState {
-  final String errorMassage;
-  LoginErrorStata({required this.errorMassage});
+  final String ? errorMassage;
+  LoginErrorStata({ this.errorMassage});
 }
